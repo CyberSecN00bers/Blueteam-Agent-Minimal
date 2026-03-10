@@ -52,6 +52,8 @@ services:
     volumes:
       - agent_data:/app/data
       - ${LOG_DIR:-./logs}:/app/logs
+    ports:
+      - "${BLUETEAM_AGENT_PORT:-60086}:5000"
     depends_on:
       redis:
         condition: service_healthy
@@ -114,3 +116,4 @@ services:
 volumes:
   redis_data:
   agent_data:
+
