@@ -49,6 +49,7 @@ services:
       BATCH_QUEUE_KEY: ${BATCH_QUEUE_KEY:-waf:queue:llm_analysis}
       BATCH_DLQ_KEY: ${BATCH_DLQ_KEY:-waf:queue:llm_analysis_dlq}
       BATCH_RESULT_TTL: ${BATCH_RESULT_TTL:-3600}
+      TZ: 'Asia/Ho_Chi_Minh'
     volumes:
       - agent_data:/app/data
       - ${LOG_DIR:-./logs}:/app/logs
@@ -82,6 +83,7 @@ services:
       BATCH_QUEUE_KEY: ${BATCH_QUEUE_KEY:-waf:queue:llm_analysis}
       BATCH_DLQ_KEY: ${BATCH_DLQ_KEY:-waf:queue:llm_analysis_dlq}
       BATCH_RESULT_TTL: ${BATCH_RESULT_TTL:-3600}
+      TZ: 'Asia/Ho_Chi_Minh'
     volumes:
       - agent_data:/app/data
       - ${LOG_DIR:-./logs}:/app/logs
@@ -104,6 +106,7 @@ services:
     environment:
       PORT: "${INGEST_INTERNAL_PORT:-9002}"
       AI_URL: ${AI_URL:-http://blueteam-agent:5000/api/analyze}
+      TZ: 'Asia/Ho_Chi_Minh'
     depends_on:
       blueteam-agent:
         condition: service_healthy
@@ -116,4 +119,5 @@ services:
 volumes:
   redis_data:
   agent_data:
+
 
