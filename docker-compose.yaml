@@ -41,6 +41,9 @@ services:
       QDRANT_URL: ${QDRANT_URL:-http://localhost:6333}
       QDRANT_API_KEY: ${QDRANT_API_KEY:-}
       QDRANT_COLLECTION: ${QDRANT_COLLECTION:-waf_payloads}
+      QDRANT_DENSE_VECTOR_NAME: ${QDRANT_DENSE_VECTOR_NAME:-dense}
+      QDRANT_SPARSE_VECTOR_NAME: ${QDRANT_SPARSE_VECTOR_NAME:-sparse}
+      RAG_DENSE_MODEL: ${RAG_DENSE_MODEL:-jinaai/jina-embeddings-v2-base-code}
       APP_PORT: ${APP_PORT:-5000}
       SQLITE_DB_PATH: ${SQLITE_DB_PATH:-data/copilot_data.db}
       SIEM_LOG_PATH: ${SIEM_LOG_PATH:-logs/ai_alerts.jsonl}
@@ -78,6 +81,9 @@ services:
       QDRANT_URL: ${QDRANT_URL:-http://localhost:6333}
       QDRANT_API_KEY: ${QDRANT_API_KEY:-}
       QDRANT_COLLECTION: ${QDRANT_COLLECTION:-waf_payloads}
+      QDRANT_DENSE_VECTOR_NAME: ${QDRANT_DENSE_VECTOR_NAME:-dense}
+      QDRANT_SPARSE_VECTOR_NAME: ${QDRANT_SPARSE_VECTOR_NAME:-sparse}
+      RAG_DENSE_MODEL: ${RAG_DENSE_MODEL:-jinaai/jina-embeddings-v2-base-code}
       BATCH_MAX_SIZE: ${BATCH_MAX_SIZE:-20}
       BATCH_WINDOW_SECONDS: ${BATCH_WINDOW_SECONDS:-10.0}
       BATCH_QUEUE_KEY: ${BATCH_QUEUE_KEY:-waf:queue:llm_analysis}
