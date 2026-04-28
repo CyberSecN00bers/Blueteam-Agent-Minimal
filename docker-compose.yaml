@@ -35,6 +35,10 @@ services:
     image: hnquangit/blueteam-agent:latest
     container_name: waf-blueteam-agent
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 3G
     environment:
       GOOGLE_API_KEY: ${GOOGLE_API_KEY:-}
       REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
@@ -52,12 +56,9 @@ services:
       BATCH_QUEUE_KEY: ${BATCH_QUEUE_KEY:-waf:queue:llm_analysis}
       BATCH_DLQ_KEY: ${BATCH_DLQ_KEY:-waf:queue:llm_analysis_dlq}
       BATCH_RESULT_TTL: ${BATCH_RESULT_TTL:-3600}
-      TZ: 'Asia/Ho_Chi_Minh'
     volumes:
       - agent_data:/app/data
       - ${LOG_DIR:-./logs}:/app/logs
-    ports:
-      - "${BLUETEAM_AGENT_PORT:-60086}:5000"
     depends_on:
       redis:
         condition: service_healthy
@@ -75,6 +76,10 @@ services:
     image: hnquangit/blueteam-agent:latest
     container_name: waf-batch-worker
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 1G
     environment:
       GOOGLE_API_KEY: ${GOOGLE_API_KEY:-}
       REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
@@ -89,7 +94,6 @@ services:
       BATCH_QUEUE_KEY: ${BATCH_QUEUE_KEY:-waf:queue:llm_analysis}
       BATCH_DLQ_KEY: ${BATCH_DLQ_KEY:-waf:queue:llm_analysis_dlq}
       BATCH_RESULT_TTL: ${BATCH_RESULT_TTL:-3600}
-      TZ: 'Asia/Ho_Chi_Minh'
     volumes:
       - agent_data:/app/data
       - ${LOG_DIR:-./logs}:/app/logs
@@ -112,7 +116,6 @@ services:
     environment:
       PORT: "${INGEST_INTERNAL_PORT:-9002}"
       AI_URL: ${AI_URL:-http://blueteam-agent:5000/api/analyze}
-      TZ: 'Asia/Ho_Chi_Minh'
     depends_on:
       blueteam-agent:
         condition: service_healthy
@@ -125,5 +128,3 @@ services:
 volumes:
   redis_data:
   agent_data:
-
-
